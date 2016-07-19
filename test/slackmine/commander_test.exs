@@ -2,14 +2,14 @@ defmodule Slackmine.CommanderTest do
   use ExUnit.Case, async: true
 
   test "it can describe a single ticket" do
-    assert Slackmine.Commander.run("show 4567") == "4567: Urgent bug (Doing)"
+    assert Slackmine.Commander.run("show 4567") == %{text: "4567: Urgent bug (Doing, http://example.com/issues/4567)", response_type: "in_channel"}
   end
 
   test "it shows an error when the ticket could not be found" do
-    assert Slackmine.Commander.run("show 1234") == "I can't find that ticket."
+    assert Slackmine.Commander.run("show 1234") == %{text: "I can't find that ticket.", response_type: "ephemeral"}
   end
 
   test "it respond with an error for other commands" do
-    assert Slackmine.Commander.run("do it") == "Sorry, I don't know what you mean."
+    assert Slackmine.Commander.run("do it") == %{response_type: "ephemeral", text: "Sorry, I don't know what you mean."}
   end
 end

@@ -41,7 +41,7 @@ defmodule Slackmine.Redmine.Memory do
         },
         "updated_on" => "2016-04-29T12:05:19Z"
       }
-    {:ok, response}
+    {:ok, response, "http://example.com/issues/4567"}
   end
 
   def get_issue(_id) do

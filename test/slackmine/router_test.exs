@@ -17,7 +17,8 @@ defmodule Slackmine.RouterTest do
     conn = Slackmine.Router.call(conn, @opts)
     assert conn.state == :sent
     assert conn.status == 200
-    assert conn.resp_body == "Sorry, I don't know what you mean."
+    assert get_resp_header(conn, "content-type") == ["application/json; charset=utf-8"]
+    assert conn.resp_body == "{\"text\":\"Sorry, I don't know what you mean.\",\"response_type\":\"ephemeral\"}"
   end
 
   test "responds with error when posting commands with invalid token" do
