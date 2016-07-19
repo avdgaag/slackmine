@@ -22,6 +22,7 @@ use Mix.Config
 #
 
 config :slackmine,
+  slack_token: "foobar",
   redmine_client: Slackmine.Redmine.HTTP
 
 # It is also possible to import configuration files, relative to this

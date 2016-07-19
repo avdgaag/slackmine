@@ -1,7 +1,9 @@
 defmodule Slackmine.Router do
   use Plug.Router
 
-  plug Plug.Parsers, parsers: [:urlencoded]
+  @token Application.get_env(:slackmine, :slack_token)
+
+  plug Plug.Parsers, parsers: [:urlencoded, :multipart]
   plug Plug.Logger
   plug :match
   plug :dispatch
@@ -11,7 +13,11 @@ defmodule Slackmine.Router do
   end
 
   post "/command" do
-    send_resp(conn, 200, Slackmine.Commander.run(conn.params["text"]))
+    if conn.params["token"] == @token do
+      send_resp(conn, 200, Slackmine.Commander.run(conn.params["text"]))
+    else
+      send_resp(conn, 401, "Unauthorized")
+    end
   end
 
   match _ do

@@ -9,6 +9,9 @@
     },
     "REDMINE_API_KEY": {
       "description": "API key to use to authenticate API calls"
+    },
+    "SLACK_TOKEN": {
+      "description": "Token used by Slack to authenticate against our API"
     }
   }
 }
