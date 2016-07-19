@@ -15,7 +15,7 @@ defmodule Slackmine.Redmine.HTTP do
     case get_response(url) do
       %HTTPotion.Response{body: body, status_code: 200} ->
         %{"issue" => issue} = Poison.decode!(body)
-        {:ok, issue, url}
+        {:ok, issue, String.replace_suffix(url, ".json", "")}
       _ ->
         {:error, "Not Found"}
     end

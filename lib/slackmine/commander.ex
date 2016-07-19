@@ -5,7 +5,7 @@ defmodule Slackmine.Commander do
   def run("show " <> id) do
     case @redmine_client.get_issue(id) do
       {:ok, issue, url} ->
-        public_response("#{id}: #{issue["subject"]} (#{issue["status"]["name"]}, #{url})")
+        public_response("<#{url}|#{id}>: #{issue["subject"]} (#{issue["status"]["name"]})")
       {_, msg} ->
         Logger.error "Error looking up " <> id <> ": " <> msg
         private_response("I can't find that ticket.")
