@@ -1,6 +1,14 @@
 defmodule Slackmine.Slack do
   require Logger
 
+  @moduledoc """
+  Deal with communication with Slack.
+  """
+
+  @doc """
+  Send a POST request to Slack using a given URL and post body. The response
+  will only be logged.
+  """
   def notify(body, url, cmd) do
     response = HTTPotion.post(
       url,

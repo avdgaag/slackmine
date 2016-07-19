@@ -14,7 +14,7 @@ defmodule Slackmine do
       # worker(Slackmine.Worker, [arg1, arg2, arg3]),
 
       Plug.Adapters.Cowboy.child_spec(:http, Slackmine.Router, [], [port: port]),
-      worker(Slackmine.Responder, [])
+      worker(Slackmine.Worker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

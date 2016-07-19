@@ -1,7 +1,11 @@
 defmodule Slackmine.Router do
   use Plug.Router
-
   @token Application.get_env(:slackmine, :slack_token)
+
+  @moduledoc """
+  The web endpoints that we expose to the world. This includes a basic homepage
+  and the endpoint exposed to Slack to accept incoming requests.
+  """
 
   plug Plug.Parsers, parsers: [:urlencoded, :multipart]
   plug Plug.Logger
@@ -9,12 +13,12 @@ defmodule Slackmine.Router do
   plug :dispatch
 
   get "/" do
-    send_resp(conn, 200, "Hello, world!")
+   send_resp(conn, 200, "Hello, world!")
   end
 
   post "/command" do
     if conn.params["token"] == @token do
-      Slackmine.Responder.notify(
+      Slackmine.Worker.respond(
         conn.params["response_url"],
         conn.params["text"]
       )
