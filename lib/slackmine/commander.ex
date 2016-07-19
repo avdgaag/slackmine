@@ -12,6 +12,10 @@ defmodule Slackmine.Commander do
     end
   end
 
+  def run("help") do
+    private_response("Try `show 1234`")
+  end
+
   def run(_cmd) do
     private_response("Sorry, I don't know what you mean.")
   end
