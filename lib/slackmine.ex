@@ -13,7 +13,8 @@ defmodule Slackmine do
       # Starts a worker by calling: Slackmine.Worker.start_link(arg1, arg2, arg3)
       # worker(Slackmine.Worker, [arg1, arg2, arg3]),
 
-      Plug.Adapters.Cowboy.child_spec(:http, Slackmine.Router, [], [port: port])
+      Plug.Adapters.Cowboy.child_spec(:http, Slackmine.Router, [], [port: port]),
+      worker(Slackmine.Responder, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

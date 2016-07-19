@@ -14,10 +14,11 @@ defmodule Slackmine.Router do
 
   post "/command" do
     if conn.params["token"] == @token do
-      body = Slackmine.Commander.run(conn.params["text"])
-      conn
-      |> put_resp_content_type("application/json")
-      |> send_resp(200, Poison.encode!(body))
+      Slackmine.Responder.notify(
+        conn.params["response_url"],
+        conn.params["text"]
+      )
+      send_resp(conn, 200, "Give me a second...")
     else
       send_resp(conn, 401, "Unauthorized")
     end

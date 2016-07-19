@@ -12,13 +12,12 @@ defmodule Slackmine.RouterTest do
     assert conn.resp_body == "Hello, world!"
   end
 
-  test "responds to commands posted to /command with valid token" do
+  test "responds with OK to /command with valid token" do
     conn = conn(:post, "/command", token: "foobar")
     conn = Slackmine.Router.call(conn, @opts)
     assert conn.state == :sent
     assert conn.status == 200
-    assert get_resp_header(conn, "content-type") == ["application/json; charset=utf-8"]
-    assert conn.resp_body == "{\"text\":\"Sorry, I don't know what you mean.\",\"response_type\":\"ephemeral\"}"
+    assert conn.resp_body == "Give me a second..."
   end
 
   test "responds with error when posting commands with invalid token" do
