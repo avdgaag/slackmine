@@ -1,0 +1,14 @@
+{
+  "buildpacks": [
+    { "url": "https://github.com/HashNuke/heroku-buildpack-elixir.git" }
+  ],
+  "env": {
+    "MIX_ENV": "prod",
+    "REDMINE_DOMAIN": {
+      "description": "URL to the Redmine installation to send API calls to"
+    },
+    "REDMINE_API_KEY": {
+      "description": "API key to use to authenticate API calls"
+    }
+  }
+}
