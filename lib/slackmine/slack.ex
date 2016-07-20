@@ -27,4 +27,16 @@ defmodule Slackmine.Slack do
         Logger.warn "An unknown error occured"
     end
   end
+
+  def public_response(text) do
+    Map.merge(private_response(text), %{response_type: "in_channel"})
+  end
+
+  def public_response(text, attachment) do
+    Map.merge(public_response(text), %{attachments: [%{text: attachment}]})
+  end
+
+  def private_response(text) do
+    %{text: text, response_type: "ephemeral"}
+  end
 end

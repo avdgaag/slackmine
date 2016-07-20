@@ -1,5 +1,6 @@
 defmodule Slackmine.Commander do
   require Logger
+  import Slackmine.Slack, only: [public_response: 2, private_response: 1]
   @redmine_client Application.get_env(:slackmine, :redmine_client)
 
   @moduledoc """
@@ -24,17 +25,5 @@ defmodule Slackmine.Commander do
 
   def run(_cmd) do
     private_response("Sorry, I don't know what you mean.")
-  end
-
-  defp public_response(text) do
-    Map.merge(private_response(text), %{response_type: "in_channel"})
-  end
-
-  defp public_response(text, attachment) do
-    Map.merge(public_response(text), %{attachments: [%{text: attachment}]})
-  end
-
-  defp private_response(text) do
-    %{text: text, response_type: "ephemeral"}
   end
 end
