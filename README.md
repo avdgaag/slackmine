@@ -1,4 +1,4 @@
-# Slackmine
+# Slackmine [![Build Status](https://travis-ci.org/avdgaag/slackmine.svg?branch=master)](https://travis-ci.org/avdgaag/slackmine)
 
 Elixir application for querying a Redmine application using Slack slash commands. For example, using `/redmine show 1234` will show information about a Redmine ticket with ID 1234.
 
